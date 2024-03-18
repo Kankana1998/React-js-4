@@ -7,6 +7,7 @@ const Body = () => {
     //Local State Variable - Super powerful variable
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
+    const [searchText, setsearchText] = useState("");
     useEffect(() => {
         fetchData();
     }, []);
@@ -25,10 +26,19 @@ const Body = () => {
         
     };
 
-
     return listOfRestaurants.length === 0 ? <Shimmer /> :  (
       <div className='body'>
         <div className='filter'>
+          <input type="text" className="search-box" value={searchText} onChange={(e) => {
+            setsearchText(e.target.value)
+          }}/>
+          <button onClick={() => {
+            const filteredRestaurant = listOfRestaurants.filter(
+              (res) => res.info.name.includes(searchText));
+            //console.log(searchText);
+            setListOfRestaurants(filteredRestaurant);
+          }}>Search</button>
+
           <button className="filter-btn" onClick={() => {
             const filteredList  = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4.4
