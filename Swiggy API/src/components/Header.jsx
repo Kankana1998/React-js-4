@@ -8,7 +8,7 @@ const [btnNameReact, setBtnNameReact] = useState("Login");
 
 const onlineStatus = useOnlineStatus();
     return (
-      <div className="flex justify-between bg-pink-100 shadow-lg px-4">
+      <div className="flex justify-between bg-pink-100 shadow-lg sm:bg-yellow-100 lg:bg-green-100 px-4">
         <div className="logo-container">
         <img className="w-56"
         src={LOGO_URL} alt="logo" />

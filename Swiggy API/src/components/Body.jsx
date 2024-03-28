@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -9,6 +9,9 @@ const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   let [filteredRestaurant, setfilteredRestaurant] = useState([]);
   const [searchText, setsearchText] = useState("");
+
+const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -19,7 +22,7 @@ const Body = () => {
     );
     const json = await data.json();
 
-    // console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -28,7 +31,7 @@ const Body = () => {
     setfilteredRestaurant(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    //console.log(listOfRestaurants);
+    // console.log(listOfRestaurants);
   };
 
   const onlineStatus = useOnlineStatus();
@@ -88,7 +91,10 @@ const Body = () => {
             to={"/restaurants/" + restaurant.info.id}
             style={{ textDecoration: "none" }}
           >
-            <RestaurantCard resData={restaurant} />
+            {
+              restaurant.info.avgRating > 4.4 ? (<RestaurantCardPromoted  resData={restaurant}/>) : (<RestaurantCard resData={restaurant} /> )
+            }
+            
           </Link>
         ))}
       </div>
