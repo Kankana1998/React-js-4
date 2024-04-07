@@ -39,7 +39,7 @@ const categories = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.
 
          {
             categories.map((category) => 
-                <RestaurantCategory  data={category?.card?.card}/>
+                <RestaurantCategory key={category?.card?.card.title} data={category?.card?.card}/>
             )
          }
             
