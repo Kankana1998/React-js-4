@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   //Local State Variable - Super powerful variable
@@ -22,7 +23,7 @@ const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
     );
     const json = await data.json();
 
-    console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    //console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -41,6 +42,9 @@ const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
         Looks like you're offline!! Please check your internet connection.
       </h1>
     );
+
+  const {loggedInUser, setUserInfo} = useContext(UserContext);
+
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -82,7 +86,13 @@ const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
           Top Rated Restaurants
         </button>
         </div>
-       
+       <div className="search m-4 p-4 flex items-center">
+        <label>UserName: </label>
+        <input className="border border-black pl-2" 
+        value={loggedInUser}
+        onChange={(e) => setUserInfo(e.target.value)}
+        />
+       </div>
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurant.map((restaurant) => (
