@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import Header from './components/Header';
 import { Outlet } from 'react-router-dom';
 import UserContext from './utils/UserContext';
+import {Provider}  from 'react-redux';
+import appStore from './utils/appStore';
 //import './App.css'
 
 function App() {
@@ -26,11 +28,14 @@ function App() {
 
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userInfo, setUserInfo}}>
+    <Provider store={appStore}>
+       <UserContext.Provider value={{ loggedInUser: userInfo, setUserInfo}}>
      <Header />
      <Outlet />
     </UserContext.Provider>
   
+    </Provider>
+   
   );
 };
 
