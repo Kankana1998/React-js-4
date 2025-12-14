@@ -224,14 +224,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-## 📧 Contact
-
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
-
-Project Link: [https://github.com/yourusername/my-youtube](https://github.com/yourusername/my-youtube)
-
----
-
 <div align="center">
 
 **Made with ❤️ and React**
