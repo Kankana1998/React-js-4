@@ -5,9 +5,11 @@ import { Outlet } from 'react-router-dom'
 
 const Body = () => {
   return (
-    <div className='grid grid-flow-col'>
+    <div className='flex min-h-screen bg-gray-50'>
         <Sidebar />
-        <Outlet />
+        <main className='flex-1 overflow-x-hidden'>
+          <Outlet />
+        </main>
     </div>
   )
 }
